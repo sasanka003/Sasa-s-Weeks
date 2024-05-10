@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signInStart, signInSuccess, signInFailure  } from '../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { loading, error:errorMessage }= useSelector((state) => state.user);
   const navigate = useNavigate();
   const handleChange = (e) => {
     // console.log(e.target.value);
@@ -20,15 +22,14 @@ export default function Signin() {
     e.preventDefault();
 
     if(!formData.email || !formData.password) {
-      return setErrorMessage('Please fill in all fields!');
+      return dispatch(signInFailure('Please fill in all fields!'));
     }
     if(formData.password.length < 6) {
-      return setErrorMessage('Password must be at least 6 characters long!');
+      return dispatch(signInFailure('Password must be at least 6 characters!'));
     }
 
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       const response = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
@@ -39,17 +40,14 @@ export default function Signin() {
       const data = await response.json();
       console.log(data);
       if(data.success === false) {
-        setLoading(false);
-        return setErrorMessage(data.Message);
+        return dispatch(signInFailure(data.Message));
       }
-      setLoading(false);
       if(response.ok) {
+        dispatch(signInSuccess(data));
         navigate('/');
       }
     } catch (error) {
-      // console.error(error);
-      setErrorMessage(error.Message);
-      setLoading(false);
+      dispatch(signInFailure(error.Message));
     }
   }
 
