@@ -6,6 +6,7 @@ import Projects from './pages/Projects';
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
       </Routes>
-      
+      <Footer/>
     </BrowserRouter>
   )
 }
