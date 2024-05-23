@@ -231,7 +231,7 @@ export default function DashProfile() {
         >
           {loading ? "Loading..." : "Update"}
         </Button>
-        {currentUser.type === "admin" && (
+        {currentUser.type === "admin" || currentUser.type === 'editor' && (
           <Link to={'/create-post'}>
             <Button
               type="button"

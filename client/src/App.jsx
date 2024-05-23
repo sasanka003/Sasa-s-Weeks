@@ -8,7 +8,7 @@ import Signin from './pages/Signin';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
-import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
+import OnlyEditorPrivateRoute from './components/OnlyEditorPrivateRoute';
 import CreatePost from './pages/CreatePost';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route element={<PrivateRoute/>}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route element={<OnlyAdminPrivateRoute />}>
+          <Route element={<OnlyEditorPrivateRoute />}>
             <Route path="/create-post" element={<CreatePost />} />
           </Route>
         </Route>
