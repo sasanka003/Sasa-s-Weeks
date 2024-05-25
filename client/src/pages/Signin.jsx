@@ -41,14 +41,14 @@ export default function Signin() {
       const data = await response.json();
       console.log(data);
       if(data.success === false) {
-        return dispatch(signInFailure(data.Message));
+        return dispatch(signInFailure(data.message));
       }
       if(response.ok) {
         dispatch(signInSuccess(data));
         navigate('/');
       }
     } catch (error) {
-      dispatch(signInFailure(error.Message));
+      dispatch(signInFailure(error.message));
     }
   }
 

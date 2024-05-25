@@ -41,7 +41,7 @@ export default function Signup() {
       console.log(data);
       if(data.success === false) {
         setLoading(false);
-        return setErrorMessage(data.Message);
+        return setErrorMessage(data.message);
       }
       setLoading(false);
       if(response.ok) {
@@ -49,7 +49,7 @@ export default function Signup() {
       }
     } catch (error) {
       // console.error(error);
-      setErrorMessage(error.Message);
+      setErrorMessage(error.message);
       setLoading(false);
     }
   }

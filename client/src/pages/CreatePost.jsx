@@ -64,10 +64,6 @@ export default function CreatePost() {
         setPublishError(data.message);
         return;
       }
-      if(data.success === flase) {
-        setPublishError(data.message);
-        return;
-      }
       if (res.ok) {
         setPublishError(null);
       }
