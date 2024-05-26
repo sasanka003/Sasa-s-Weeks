@@ -7,6 +7,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { app } from "../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
   const [image, setImage] = useState(null);
@@ -14,6 +15,8 @@ export default function CreatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [publishError, setPublishError] = useState(null);
   const [formData, setFormData] = useState({});
+
+  const navigate = useNavigate();
   const handleImageUpload = async () => {
     try {
       if (!image) {
@@ -59,6 +62,7 @@ export default function CreatePost() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      console.log(data);
 
       if (!res.ok) {
         setPublishError(data.message);
@@ -66,6 +70,7 @@ export default function CreatePost() {
       }
       if (res.ok) {
         setPublishError(null);
+        navigate(`/post/${data.slug}');
       }
     } catch (error) {
       setPublishError("Something went wrong");
