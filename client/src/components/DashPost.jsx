@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export default function DashPost() {
   const { currentUser } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
+  const [showMore, setShowMore] = useState(true);
   console.log(userPosts);
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -14,6 +15,9 @@ export default function DashPost() {
         const data = await res.json();
         if(res.ok) {
           setUserPosts(data.posts);
+          if(data.posts.length < 9) {
+            setShowMore(false);
+          }
         }
       } catch (error) {
         console.log(error.message);
@@ -23,6 +27,22 @@ export default function DashPost() {
       fetchUserPosts();
     }
   }, [currentUser._id]);
+
+  const handleShowMore = async () => {
+    const srartIndex = userPosts.length;
+    try {
+      const res = await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${srartIndex}`);
+      const data = await res.json();
+      if(res.ok) {
+        setUserPosts((prev) => [...prev, ...data.posts]);
+        if(data.posts.length < 9) {
+          setShowMore(false);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   return <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500 '>
     {currentUser.type === 'editor' || currentUser.type === 'admin' && userPosts.length > 0 ? (
       <>
@@ -34,10 +54,10 @@ export default function DashPost() {
             <Table.HeadCell>Category</Table.HeadCell>
             <Table.HeadCell>Delete</Table.HeadCell>
             <Table.HeadCell>
-              <span className="">Edit</span>
+              <span>Edit</span>
             </Table.HeadCell>
           </Table.Head>
-          <Table.Body>
+          <Table.Body className='divide-y'>
             {userPosts.map((post) => (
               <Table.Row className='bg-white dark:bg-gray-800 dark:border-gray-700'>
                 <Table.Cell>
@@ -71,6 +91,11 @@ export default function DashPost() {
             ))}
           </Table.Body>
         </Table>
+        {showMore && (
+          <button onClick={handleShowMore} className='w-full text-teal-500 self-center text-sm py-7'>
+            Show more
+          </button>
+        )}
       </>
     ) : (
       <p>No posts found</p>
