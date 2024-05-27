@@ -69,7 +69,31 @@ export const getPosts = async (req, res, next) => {
   }
 };
 
-export const updatePost = async (req, res, next) => {};
+export const updatePost = async (req, res, next) => {
+  if (req.user.id !== req.params.userId || (req.user.type !== "editor" && req.user.type !== "admin")) {
+    return next(errorHandler(403, "You are not allowed to update a post"));
+  }
+  try {
+    const slug = req.body.title
+    .toLowerCase()
+    .split(" ")
+    .join("-")
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9-]/g, "");
+    const updatedPost = await Post.findByIdAndUpdate(req.params.postId, {
+      $set: {
+        title: req.body.title,
+        content: req.body.content,
+        category: req.body.category,
+        slug,
+        image: req.body.image,
+      },
+      }, { new: true });
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 export const deletePost = async (req, res, next) => {
   if (req.user.id !== req.params.userId || (req.user.type !== "editor" && req.user.type !== "admin")) {

@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
 import OnlyEditorPrivateRoute from './components/OnlyEditorPrivateRoute';
 import CreatePost from './pages/CreatePost';
+import UpdatePost from './pages/UpdatePost';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route element={<OnlyEditorPrivateRoute />}>
             <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/update-post/:postId" element={<UpdatePost />} />
           </Route>
         </Route>
         <Route path="/projects" element={<Projects />} />
