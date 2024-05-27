@@ -9,3 +9,64 @@ body {
 .ql-editor {
   font-size: 1.02rem;
 }
+
+.post-content p {
+  margin-bottom: 0.5rem;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  font-weight: 400;
+  font-size: 1.5rem; /* Adjust size as needed */
+}
+
+.post-content strong {
+  font-weight: bold;
+}
+
+.post-content em,
+.post-content i {
+  font-style: italic;
+}
+
+.post-content blockquote {
+  margin: 0; /* Adjust margins as needed */
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+  border-left: 4px solid #ccc; /* Add a left border for style */
+}
+
+.post-content ul,
+.post-content ol {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem; /* Adjust indentation as needed */
+}
+
+.post-content li {
+  margin-bottom: 0.25rem; /* Adjust spacing between list items */
+}
+
+/* Style list bullets or numbers */
+.post-content ul li {
+  list-style-type: disc; /* Change to desired bullet style */
+}
+
+.post-content ol li {
+  list-style-type: decimal; /* Change to desired number style */
+}
+
+.post-content a {
+  color: #0cd976;
+  text-decoration: none;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}
+
+.dark .post-content a {
+  color: #d71111;
+}
