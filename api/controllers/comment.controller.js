@@ -83,3 +83,33 @@ export const likeComment = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getComments = async (req, res, next) => {
+    try {
+      const startIndex = req.query.startIndex || 0;
+      const limit = req.query.limit || 9;
+      const sortDirection = req.query.order === 'asc' ? 1 : -1;
+      const comments = await Comment.find()
+        .sort({ createdAt: sortDirection })
+        .skip(parseInt(startIndex))
+        .limit(parseInt(limit));
+  
+      const totalComments = await Comment.countDocuments();
+  
+      const now = new Date();
+  
+      const oneMonthAgo = new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        now.getDate()
+      );
+  
+      const lastMonthComments = await Comment.countDocuments({
+        createdAt: { $gte: oneMonthAgo },
+      });
+  
+      res.status(200).json({ comments, totalComments, lastMonthComments });
+    } catch (error) {
+      return next(error);
+    }
+  };
