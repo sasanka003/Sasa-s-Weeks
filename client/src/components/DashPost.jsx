@@ -97,7 +97,7 @@ export default function DashPost() {
           </Table.Head>
           <Table.Body className='divide-y'>
             {userPosts.map((post) => (
-              <Table.Row className='bg-white dark:bg-gray-800 dark:border-gray-700'>
+              <Table.Row key={post._id} className='bg-white dark:bg-gray-800 dark:border-gray-700'>
                 <Table.Cell>
                   {new Date(post.updatedAt).toLocaleDateString()}
                 </Table.Cell>
