@@ -1,16 +1,34 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signoutStart, signoutSuccess, signoutFailure } from "../redux/user/userSlice";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const path = useLocation().pathname;
+  const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { currentUser } = useSelector(state => state.user);
   const { theme } = useSelector(state => state.theme);
+  const [searchTerm, setSearchTerm] = useState("");
+  console.log(searchTerm);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    setSearchTerm(searchParams.get("searchTerm") || "");
+  }, [location.search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("searchTerm", searchTerm);
+    const searchQuery = searchParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
   const handleSignout = async () => {
     try {
       dispatch(signoutStart());
@@ -35,12 +53,14 @@ export default function Header() {
         </span>
         Blog
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
             type='text'
             placeholder='Search...'
             rightIcon={AiOutlineSearch}
             className="hidden lg:inline"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
       <Button className='w-12 h-10 lg:hidden' color='gray' pill>
