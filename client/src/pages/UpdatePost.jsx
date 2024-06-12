@@ -15,7 +15,10 @@ export default function UpdatePost() {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [publishError, setPublishError] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    content: '',
+  });
+  const [post, setPost] = useState(null);
   const { postId } = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
@@ -31,13 +34,18 @@ export default function UpdatePost() {
         } else {
           setPublishError(null);
           setFormData(data.posts[0]);
-        }
-      };
-      getPost();
-    } catch (error) {
-        console.error(error);
-    }
-    }, [postId]);
+          setPost(data.posts[0]);
+          }
+          };
+          getPost();
+          } catch (error) {
+            console.error(error);
+            }
+            }, [postId]);
+            console.log('below');
+            console.log(formData);
+            console.log(post);
+          console.log('above');
   const handleImageUpload = async () => {
     try {
       if (!image) {
@@ -111,18 +119,20 @@ export default function UpdatePost() {
             required
             id="title"
             className="flex-1"
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
           <Select
             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
             value={formData.category}
+            id="category"
           >
             <option value="uncatagorized">Select a category</option>
             <option value="genai">GenAI</option>
             <option value="machine-learning">Machine Learning</option>
             <option value="data-science">Data Science</option>
             <option value="web-development">Web Development</option>
+            <option value="fastapi">FastAPI</option>
           </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dashed p-3 rounded-lg">
@@ -159,8 +169,11 @@ export default function UpdatePost() {
           placeholder="Write something ..."
           className="h-72 mb-12"
           required
-          onChange={(value) => setFormData({ ...formData, content: value })}
           value={formData.content}
+          onChange={(value) => setFormData((prevState) => ({
+            ...prevState,
+            content: value,
+          }))}
         />
         <Button type="submit" gradientDuoTone="purpleToBlue">
           Update
