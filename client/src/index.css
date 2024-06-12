@@ -33,12 +33,6 @@ body {
   font-style: italic;
 }
 
-.post-content blockquote {
-  margin: 0; /* Adjust margins as needed */
-  padding: 0.5rem 1rem; /* Adjust padding as needed */
-  border-left: 4px solid #ccc; /* Add a left border for style */
-}
-
 .post-content ul,
 .post-content ol {
   margin-bottom: 0.5rem;
@@ -69,4 +63,61 @@ body {
 
 .dark .post-content a {
   color: #d71111;
+}
+
+/* Styles for light mode */
+.post-content blockquote {
+  border-left: 4px solid #E5E7EB; /* Tailwind gray-300 */
+  padding-left: 1em;
+  color: #374151; /* Tailwind gray-700 */
+  background-color: #F9FAFB; /* Tailwind gray-50 */
+}
+
+.post-content pre {
+  background-color: #F3F4F6; /* Tailwind gray-100 */
+  padding: 1em;
+  border-radius: 0.5em;
+  position: relative;
+  overflow: auto;
+}
+
+.post-content pre code {
+  color: #1F2937; /* Tailwind gray-800 */
+}
+
+/* Styles for dark mode */
+.dark .post-content blockquote {
+  border-left: 4px solid #4B5563; /* Tailwind gray-600 */
+  padding-left: 1em;
+  color: #D1D5DB; /* Tailwind gray-300 */
+  background-color: #1F2937; /* Tailwind gray-800 */
+}
+
+.dark .post-content pre {
+  background-color: #374151; /* Tailwind gray-700 */
+  padding: 1em;
+  border-radius: 0.5em;
+  position: relative;
+  overflow: auto;
+}
+
+.dark .post-content pre code {
+  color: #F9FAFB; /* Tailwind gray-50 */
+}
+
+/* Copy button styles */
+.copy-btn {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background-color: #10B981; /* Tailwind green-500 */
+  color: white;
+  border: none;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.dark .copy-btn {
+  background-color: #059669; /* Tailwind green-600 */
 }
