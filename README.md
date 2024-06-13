@@ -87,4 +87,4 @@ Join me on this exciting journey through the world of technology. Let's learn, s
 
 ---
 
-Thank you for being a part of **Telling Sasa's Weeks**. Happy reading and coding!
+Thank you for being a part of **Sasa's Weeks**. Happy reading and coding!
