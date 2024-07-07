@@ -62,7 +62,7 @@ export default function Signup() {
           <span className='px-2 py-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg text-white'>
             Sasa's
           </span>
-          Blog
+          Weeks
         </Link>
         <p className='text-sm mt-5'>
           This is a demo project. You can sign up with email and password

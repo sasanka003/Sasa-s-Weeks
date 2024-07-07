@@ -51,7 +51,7 @@ export default function Header() {
         <span className='px-2 py-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg text-white'>
           Sasa's
         </span>
-        Blog
+        Weeks
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput
