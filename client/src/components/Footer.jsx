@@ -13,7 +13,7 @@ export default function FooterComponent() {
             <span className='px-2 py-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg text-white'>
               Sasa's
             </span>
-            Blog
+            Weeks
           </Link>
           </div>
           <div className='grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6'>
@@ -32,7 +32,7 @@ export default function FooterComponent() {
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Sasa's Blog
+                  Sasa's Weeks
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
