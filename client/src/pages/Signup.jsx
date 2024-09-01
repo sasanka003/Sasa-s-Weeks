@@ -59,7 +59,7 @@ export default function Signup() {
       <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
         <div className='flex-1'>
         <Link to='/' className='text-4xl font-bold dark:text-white'>
-          <span className='px-2 py-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg text-white'>
+          <span className='px-2 py-1 mr-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg text-white'>
             Sasa's
           </span>
           Weeks
