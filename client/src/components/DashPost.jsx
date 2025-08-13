@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Button, Modal, Table } from 'flowbite-react';
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { set } from 'mongoose';
 
 export default function DashPost() {
   const { currentUser } = useSelector((state) => state.user);
