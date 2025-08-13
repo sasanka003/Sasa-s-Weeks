@@ -8,5 +8,5 @@ export default defineConfig({
     port: 3001
   },
   plugins: [react()],
-  base: "Sasa_s_weeks",
+  base: "/Sasa_s_weeks/",
 })
