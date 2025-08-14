@@ -35,7 +35,7 @@ jobs:
             path: /client/dist
         
         - name: build complete
-          run: ls -R dist
+          run: pwd
 
     frontend-deploy:
         name: Deploy Frontend to GitHub Pages
