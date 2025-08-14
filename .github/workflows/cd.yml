@@ -32,7 +32,7 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
             name: frontend-build
-            path: client/dist
+            path: dist
         
         - name: build complete
           run: echo "//////////////////// build complete //////////////////////"
